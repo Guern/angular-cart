@@ -1,0 +1,27 @@
+div.product, div.sidebar-widget {
+    background-color: #EEE;
+    border: 1px;
+    border-color: #DDD;
+    border-radius: 4px;
+    padding: 8px;
+    margin-bottom: 24px;
+}
+
+div.product mark {
+    background-color: inherit;
+}
+
+div.sidebar-container {
+    background-color: #EEE;
+    border-radius: 4px;
+    margin-top: 56px;
+}
+
+ul.category-list li {
+    list-style: none;
+    margin-left: -26px;
+}
+
+a.change-pointer {
+    cursor: pointer;
+}
