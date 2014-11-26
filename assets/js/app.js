@@ -1,6 +1,21 @@
 var cartApp = angular.module('cartApp',[]);
 
-cartApp.controller('cartController', ['$scope', function($scope) {
+// headController
+// Controls views for the page header, including page title and meta information.
+cartApp.controller('headController', ['$scope', function($scope){
+    // Create array of page view titles.
+    $scope.titles = [
+        "Home", "About", "Contact", "Products",
+        "Products >> Widget #1", "Products >> Widget #2",
+        "Products >> Widget #3", "Products >> Widget #4",
+    ];
+    
+    
+}]); // End head controller
+
+// cartController
+// Controls views for the user's cart.
+cartApp.controller('cartController', ['$scope', '$http', function($scope, $http) {
     // Create category variables.
     $scope.categories = [
         // Out of order to demonstrate ng-sort
@@ -8,64 +23,84 @@ cartApp.controller('cartController', ['$scope', function($scope) {
         "Baby", "Cookware", "Jewelry", "Movies",
         
     ]; //End categories
+        
+    var request = {
+        method: 'GET',
+        url: 'includes/products.json',
+    }
     
-    // Create variables to make the descriptions more readable.
-    
-    // Widget #1 Description
-    $scope.widget1 = "This widget is the most affordable, with features that Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.";
-    
-    // Widget #2 Description
-    $scope.widget2 = "This widget is the most expensive, with an extended set of features. Like Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.";
-    
-    // Widget #3 Description
-    $scope.widget3 = "The most balanced of all the widgets, the Widget #3 is Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.";
-    
-    
-    // Insert product data into array
-    $scope.products = [
-        {   "name" : "Widget #1", "desc" : $scope.widget1, "price" : 29.95, "id" : "1",  },
-        {   "name" : "Widget #2", "desc" : $scope.widget2, "price" : 99.95, "id" : "2",  },
-        {   "name" : "Widget #3", "desc" : $scope.widget3, "price" : 49.95, "id" : "3",  },
-    ];
+    // Get products from JSON
+    // Using $http
+    $http(request).success(function(data, status, headers, config){
+        // Success scope
+        $scope.products = data;
+    }).error(function(){
+        // Error scope
+        console.log("Failed");
+    }); // End $http.get
     
     // Create an empty array for the cart
     $scope.cart = [];
     
     // Open the modal with relevant product data
-    $scope.modalBody = "Test";
-    $scope.modalId = null;
+    $scope.modalName;
+    $scope.modalId;
+    $scope.count;
     
     $scope.open = function( which ) {
         
-        switch(which) {
-            
-            case '1':
-                $scope.modalBody = "Add " + $scope.products[0].name + " to cart?";
-                $scope.modalId = 0;
-                break; // Break case 1
-            
-            case '2':
-                $scope.modalBody = "Add " + $scope.products[1].name + " to cart?";
-                $scope.modalId = 1;
-                break; // Break case 2
-            
-            case '3':
-                $scope.modalBody = "Add " + $scope.products[2].name + " to cart?";
-                $scope.modalId = 2;
-                break; // Break case 3
-            
-            } // End switch
+        $scope.modalBody = $scope.products[which].name;
+        $scope.modalId = which;
+        console.log($scope.modalId);
         
-        } // End function open
+    } // End function open
     
-    $scope.add = function( productId ) {
+    $scope.add = function( which, count ) {
+        // Add an item to the cart.
+        // First, figure out if the item is already present in the cart.
+        // If it is, increment the count property of the object.
+        // If it is not, add to the cart and initialize the count property.
+        console.log(which);
+        console.log(count);
         
-        $scope.cart.push( $scope.products[productId] );
+        // productId is used to add the item to the cart.
+        // It simply gets passed the modalId property from the switch function.
+        var productId = which;
+        var newProductId;
         
+        // index is more complex, and is used to find the product in the cart.
+        var index = $scope.cart.indexOf( $scope.products[which] );
+        console.log( $scope.products[which] );
+        // number is a variable obtained from the form element associated with the modal.
+        // We're going to use this to determine how many of something someone wants.
+        var number;
+        if( typeof parseInt(count, 10) === 'number' ) {
+            // The count is a number, so we can use it.
+            number = parseInt(count, 10);
+        } else {
+            // Somehow, we didn't get an integer value from the form.
+            // So, we're just going to set this to 1.
+            number = 1;
+        }
+        
+        if( index != -1 ) {
+            // Product exists in the cart, so simply find it and increment the count.
+            $scope.cart[index]["count"] += number;
+            
+        } else {
+            // Product does not exist in the cart, so add.
+            $scope.cart.push( $scope.products[which] );
+            newProductId = $scope.cart.indexOf( $scope.products[which] );
+            $scope.cart[newProductId]["count"] = number;
+        }
+        console.log($scope.cart);
     }
     
     $scope.remove = function( which ) {
-        
+        // Remove an item from the cart.
+        // Because the application controls what is added to the cart array and what isn't,
+        // and because the user controls what listing is removed, we can simply remove
+        // whatever the function is passed.
         var index = $scope.cart.indexOf( which );
         $scope.cart.splice( index, 1 );
         
