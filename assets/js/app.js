@@ -122,27 +122,39 @@ cartApp.controller('cartController', ['$scope', '$http', function($scope, $http)
         // First, check to make sure the cart isn't empty.
         if( cart.length > 0 ) {
             // Cart isn't empty, so send the request.
+            
+            // First, define the request.
+            // We want to 'POST' the data to a check-out form.
+            // We want to send the cart as the data.
+            var request = {
+                method: 'POST',
+                url: 'checkout.html',
+                data: cart,
+            }
+            
+            // Now, we want to send the request.
             $http(request).success(function(data, status, headers, config){
                 // Success scope
-                var request = {
-                    method: 'POST',
-                    url: 'checkout.html',
-                    data: cart,
-                }
+                
+                // Right now, just log success if the request went through.
                 console.log("Success");
 
 
             }).error(function(){
                 // Error scope
+                
+                // Right now, just log failure if the request didn't go through.
                 console.log("Failed");
 
 
-            }); // End $http.get
+            }); // End $http.post
             
             
         } else {
             // Cart is empty, don't send the request.
-            console.log("Failed");
+            
+            // Right now, just log failure because the cart is empty.
+            console.log("Failed: The cart is empty.");
             
         }
         
