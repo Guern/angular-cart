@@ -17,10 +17,12 @@ div.sidebar-container {
     margin-top: 56px;
 }
 
+ul.cart-list li,
 ul.category-list li {
     list-style: none;
     margin-left: -26px;
 }
+
 
 a.change-pointer {
     cursor: pointer;
