@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Angular-cart : Shopping cart in AngularJS">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angular-cart</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jonpemby/angular-cart">View on GitHub</a>
+
+          <h1 id="project_title">Angular-cart</h1>
+          <h2 id="project_tagline">Shopping cart in AngularJS</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jonpemby/angular-cart/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jonpemby/angular-cart/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="welcome-to-angular-cart" class="anchor" href="#welcome-to-angular-cart" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to Angular-Cart</h1>
+
+<p>This is my attempt to simplify e-commerce by using a shopping cart controlled entirely by JavaScript via AngularJS.</p>
+
+<p>Currently, it loads product information from a JSON file via Angular's $http service and loads the data into an array. Angular then sends this information to the view so that the user can interact with products and add them to the shopping cart.</p>
+
+<p>When the user is ready to check-out, Angular sends the data via POST and allows the developer to handle the information with their preferred method.</p>
+
+<p>Currently, the demo is proof of concept only and isn't quite ready for implementation on existing sites at this point.</p>
+
+<h2>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions</h2>
+
+<p>To test angular-cart, simply download the project files into your htdocs directory (for MAMP/XAMPP/LAMPP) or any directory your local development server will recognize as localhost.</p>
+
+<p>Using the default directory structure, visit</p>
+
+<pre><code>localhost/angular-cart/
+</code></pre>
+
+<p>You will be taken immediately to the products page.</p>
+
+<p>Angular-cart loads the products from a file called includes/products.json and then generates a view for the user that includes a "BUY" button. When the user clicks the "BUY" button, they are presented an option of how many they want to order and they can add them to the cart.</p>
+
+<p>Angular-cart also includes sidebar-widgets that are enabled by default. Once a user has an item in the cart, they can see their most recent item on the page sidebar.</p>
+
+<p>They also have the option of using a drop-down menu at the top of the page to see their cart.</p>
+
+<p>Modifying the files is simple. You can add new products to the JSON file as objects. Simply copy one of the pre-existing objects and edit the values or follow the same relative format.</p>
+
+<h2>
+<a id="current-issues" class="anchor" href="#current-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Issues</h2>
+
+<p>Right now the cart data doesn't persist beyond the product page. However, the unimplemented solution to this is to use HTML5's localstorage or perhaps IndexedDB or another method to store the cart on the client side in order to persist the data at least until the session expires.</p>
+
+<p>The current demo doesn't use product images, either, and this would be ideal for most e-commerce sites.</p>
+
+<h2>
+<a id="future-plans" class="anchor" href="#future-plans" aria-hidden="true"><span class="octicon octicon-link"></span></a>Future Plans</h2>
+
+<p>In the near future I plan to include:</p>
+
+<ol>
+<li>Pagination</li>
+<li>Site back-end for administrators to more easily add products</li>
+<li>Product images</li>
+<li>Full check-out processing via Stripe</li>
+<li>Cart persistence via localstorage or another medium</li>
+</ol>
+
+<h2>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
+
+<p>Jonathon Pemberton (<a href="https://github.com/jonpemby" class="user-mention">@jonpemby</a>) - Author</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angular-cart maintained by <a href="https://github.com/jonpemby">jonpemby</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
