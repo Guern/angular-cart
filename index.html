@@ -40,7 +40,8 @@
 
 <p>When the user is ready to check-out, Angular sends the data via POST and allows the developer to handle the information with their preferred method.</p>
 
-<p>Currently, the demo is proof of concept only and isn't quite ready for implementation on existing sites at this point.</p>
+<p>Currently, angular-cart is proof of concept only.</p>
+          
 
 <h2>
 <a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instructions</h2>
@@ -61,6 +62,13 @@
 <p>They also have the option of using a drop-down menu at the top of the page to see their cart.</p>
 
 <p>Modifying the files is simple. You can add new products to the JSON file as objects. Simply copy one of the pre-existing objects and edit the values or follow the same relative format.</p>
+
+<h2>
+<a id="instructions" class="anchor" href="#instructions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recent Commits</h2>
+          
+<p><strong>11/30/2014</strong></p>
+          
+<p>Changed <em>checkout.php</em> to send the <pre><code>$_POST</code></pre> via AJAX. The design philosophy has changed to make it easier to check-out. Instead of sending the user to another page, another modal will pop-up with the user's total and give them the option to check-out that way. I've updated index.html and app.js to reflect this. You can see the response information in the console.</p>
 
 <h2>
 <a id="current-issues" class="anchor" href="#current-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Issues</h2>
