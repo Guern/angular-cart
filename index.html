@@ -33,7 +33,7 @@
                       <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">View Cart ({{ cart.length }}) <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu" ng-model="cart">
-                            <li ng-repeat="item in cart"><a ng-click="remove(item)" class="change-pointer">{{ item.name }} ({{ item.count }})  <span class="glyphicon glyphicon-remove"></span></a></li>
+                            <li ng-repeat="item in cart"><a href="checkout.php" ng-click="remove(item)" class="change-pointer">{{ item.name }} ({{ item.count }})  <span class="glyphicon glyphicon-remove"></span></a></li>
                             <li ng-repeat-end><a ng-click="checkOut( cart )" class="change-pointer">Check out <span class="glyphicon glyphicon-ok"></span></a></li>
                         </ul>
                       </li>

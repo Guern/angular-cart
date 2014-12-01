@@ -8,6 +8,7 @@ cartApp.controller('headController', ['$scope', function($scope){
         "Home", "About", "Contact", "Products",
         "Products >> Widget #1", "Products >> Widget #2",
         "Products >> Widget #3", "Products >> Widget #4",
+        "Check Out",
     ];
     
     
@@ -122,32 +123,28 @@ cartApp.controller('cartController', ['$scope', '$http', function($scope, $http)
         // First, check to make sure the cart isn't empty.
         if( cart.length > 0 ) {
             // Cart isn't empty, so send the request.
-            
-            // First, define the request.
-            // We want to 'POST' the data to a check-out form.
-            // We want to send the cart as the data.
-            var request = {
-                method: 'POST',
-                url: 'checkout.html',
-                data: cart,
-            }
-            
-            // Now, we want to send the request.
-            $http(request).success(function(data, status, headers, config){
+            $http.post("http://localhost/angular-cart/checkout.php", { items: cart }).success(function(response, status, headers, config){
                 // Success scope
                 
-                // Right now, just log success if the request went through.
-                console.log("Success");
-
-
-            }).error(function(){
+                console.log("Response :" + response);
+                console.log("Status :" + status);
+                console.log("Headers :" + headers);
+                console.log("Config: " + config);
+                
+                //if( status == 200 ) {
+                //    window.location.replace("http://localhost/angular-cart/checkout.php")
+                //} // End if
+                
+            }).error(function(response){
                 // Error scope
                 
-                // Right now, just log failure if the request didn't go through.
-                console.log("Failed");
-
-
-            }); // End $http.post
+                console.log(response);
+            }).then(function(response){
+                // Then scope
+                
+                console.log(response);
+                
+            }); // End $http.post();
             
             
         } else {
